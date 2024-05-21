@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=`">
+    <title>POCO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200">
+    <div class="flex justify-center items-center fixed w-full h-full">
+        <div class="max-w-[450px] mx-auto bg-white rounded-sm">
+            <div class="border-b border-gray-200 p-5 text-center text-xl font-semibold uppercase">
+                masukan nama kolom database
+            </div>
+            <div class="p-6 grid grid-cols-1 gap-6">
+                <div class="grid grid-cols-[1fr,auto] gap-2">
+                    <div>
+                        <input type="text" class="w-full outline-none p-3 ring-1 ring-gray-200 rounded-sm text-sm focus:ring-blue-400" placeholder="nama kolom database" id="namakolom">
+                    </div>
+                </div>
+                <div class="grid grid-cols-[1fr,auto] gap-2">
+                    <div>
+                        <input type="text" class="w-full outline-none p-3 ring-1 ring-gray-200 rounded-sm text-sm focus:ring-blue-400" placeholder="hasil convert" id="hasilpoco">
+                    </div>
+                    <div>
+                        <div class="p-3 text-sm bg-blue-500 hover:bg-blue-600 rounded-sm cursor-pointer uppercase text-gray-100 " id="copyhasil">
+                            copy
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function capitalizeFirstLetter(string) {
+            const noSpaces = string.replace(/\s+/g, '');
+            return noSpaces.charAt(0).toUpperCase() + noSpaces.slice(1).toLowerCase();
+        }
+        const inputNamaKolom = document.getElementById("namakolom");
+        inputNamaKolom.addEventListener("input",(e)=>{
+                if(e.target.value.length){
+                const tekssatu = e.target.value.split("_");
+                const smp =[]
+                if(tekssatu.length){
+                    tekssatu.map(dt=>{
+                        smp.push(capitalizeFirstLetter(dt))
+                    })
+                }
+                if(smp.length){
+                    const jadioke = smp.join("")
+                    document.getElementById("hasilpoco").value = jadioke;
+                }
+            }
+        })
+
+        const copyHasil = document.getElementById("copyhasil");
+        copyHasil.addEventListener('click', () => {
+            const hasilPoco = document.getElementById("hasilpoco");
+            hasilPoco.select();
+            document.execCommand("copy");
+        });
+    </script>
+</body>
+</html>
